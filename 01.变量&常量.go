@@ -10,7 +10,7 @@ var c = 1
 // 多个变量同时声明
 var (
 	x, y int
-	z    float64
+	z       float64
 )
 
 // 如果有初始值可以简短声明 使用:=
