@@ -1,9 +1,19 @@
-# 1.run sample each file
+# 1.run sample each file ✅
 
-# 2.go fmt
+windows 开发环境配置可能有问题。要不要刷 manjaro linux?
+no! should have a win platform!
+just fix the dev optinos!
 
-# 3.go imports
+# 2.go fmt ⏳
 
-# 4.gofmt/goimports 与 vscode 集成
+# 3.go imports ⏳
+
+# 4.gofmt/goimports 与 vscode 集成 ⏳
+
+it works on manjaro.
+
+# 5. 变量声明
+
+path_to_mastery_in_go/variables.go
 
 # start with 🚩
