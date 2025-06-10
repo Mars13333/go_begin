@@ -36,7 +36,7 @@ func main1() {
 */
 
 func main2() {
-	var s []int
+	var s []int // 这是切片类型！！！ 非数组类型，数组类型是定长的！ var s [5]int, 这才是数组类型！！！
 	//s[0]=12 // panic: runtime error: index out of range [0] with length 0
 	s = append(s, 12) // success
 	fmt.Println(s)

@@ -8,17 +8,16 @@ import "fmt"
 切片是Go语言在数组之上提供的一个重要的抽象数据类型。并且和数组相比，切片提供了更灵活、更高效的数据序列访问接口。​
 */
 
-
 /*
 先了解一下数组
 
 Go语言数组是一个固定长度的、容纳同构类型元素的连续序列，因此Go数组类型具有两个属性：
 元素类型和数组长度。这两个属性都相同的数组类型是等价的。比如以下变量a、b、c对应的数组类型是三个不同的数组类型
 */
-func test1(){
-	a:=[8]int
-	b:=[8]byte
-	c:=[9]int
+func test1() {
+	a := [8]int
+	b := [8]byte
+	c := [9]int
 }
 
 /*
@@ -46,14 +45,13 @@ s:=make([]byte,5)
 如果没有在make中指定cap参数，那么cap = len
 */
 
-func test2(){
-	u:=[10]byte{11,12,13,14,15,16,17,18,19,20}
-	s1:=u[1:5] //包含头，不包含尾
-	s2:=u[6:9]
-	s3:=u[3:7] 	
-	s4:=s3[2:4] //也可以基于已有切片创建新的切片，称为切片的reslicing.并且新切片和原切片同样是共享底层数组的，通过新切片对数组的修改也会反应到原切片中。
+func test2() {
+	u := [10]byte{11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+	s1 := u[1:5] //包含头，不包含尾
+	s2 := u[6:9]
+	s3 := u[3:7]
+	s4 := s3[2:4] //也可以基于已有切片创建新的切片，称为切片的reslicing.并且新切片和原切片同样是共享底层数组的，通过新切片对数组的修改也会反应到原切片中。
 }
-
 
 /*
 因为无论切片描述的底层数组有多大，切片作为参数传递带来的性能损耗都是很小且恒定的，甚至小到可以忽略不计。
@@ -66,32 +64,31 @@ type slice struct{
 另外，切片可以提供比指针更为强大的功能，比如**下标访问**、**边界溢出校验**、**动态扩容**等。
 */
 
-
 /*
 动态扩容
 */
 
-func test3(){
+func test3() {
 	var s []byte // s被赋予零值nil
-	s.append(s,1)
+	s.append(s, 1)
 	//由于初值为零值，s这个描述符并没有绑定对应的底层数组。而经过append操作后，s显然已经绑定了属于它的底层数组。
 	//为了方便查看切片是如何动态扩容的，我们打印出每次append操作后切片s的len和cap值
-	var a[]int
-	a=append(a,11)
-	fmt.Println(len(a),cap(a)) // 1 1
-	a=append(a,12)
-	fmt.Println(len(a),cap(a)) // 2 2
-	a=append(a,13)
-	fmt.Println(len(a),cap(a)) // 3 4
-	a=append(a,14)
-	fmt.Println(len(a),cap(a)) // 4 4
-	a=append(a,15)
-	fmt.Println(len(a),cap(a)) // 5 8 
+	var a []int
+	a = append(a, 11)
+	fmt.Println(len(a), cap(a)) // 1 1
+	a = append(a, 12)
+	fmt.Println(len(a), cap(a)) // 2 2
+	a = append(a, 13)
+	fmt.Println(len(a), cap(a)) // 3 4
+	a = append(a, 14)
+	fmt.Println(len(a), cap(a)) // 4 4
+	a = append(a, 15)
+	fmt.Println(len(a), cap(a)) // 5 8
 	//可以看到切片s的len值是线性增长的，但cap值却呈现出不规则的变化, 默认是*2。
 	/*
-	这样的append操作有时会给Gopher带来一些困惑，比如通过语法u[low: high]形式进行数组切片化而创建的切片，
-	一旦切片cap触碰到数组的上界，再对切片进行append操作，切片就会和原数组解除绑定。
-	所以尽量避免对切片进行append操作。
+		这样的append操作有时会给Gopher带来一些困惑，比如通过语法u[low: high]形式进行数组切片化而创建的切片，
+		一旦切片cap触碰到数组的上界，再对切片进行append操作，切片就会和原数组解除绑定。
+		所以尽量避免对切片进行append操作。!!!
 	*/
 }
 

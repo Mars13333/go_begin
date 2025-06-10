@@ -29,14 +29,14 @@ func block() {
 	fmt.Println(n2)
 	fmt.Println(f2)
 	fmt.Println(s2)
+	fmt.Println(string(s2)) //显示转换
 	// why here.
 	// 因为简要声明无法作为包级别变量！上面var都是包级变量，只能用var, 并且推荐形式为：var variableName = InitExpression
 	// 仅可作为函数或方法体内部的局部变量
 }
 
-func main(){
+func main() {
 	block()
 }
-
 
 // 尽量使用短声明。 简明扼要， 见闻之意， 联系上下文， 不推荐一长串的方式。
