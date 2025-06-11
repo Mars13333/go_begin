@@ -47,6 +47,14 @@ tophash区域下面是**一块连续的内存区域**，存储的是该bucket承
 
 key存储区域下方是另一块连续的内存区域，该区域存储的是key对应的value。和key一样，该区域的创建也得到了maptype中信息的帮助。Go运行时采用了将key和value分开存储而不是采用一个kv接着一个kv的kv紧邻方式存储，这带来的是算法上的复杂性，但却减少了因内存对齐带来的内存浪费。以map\[int8]int64为例，我们看看存储空间利用率对比:
 
+注：
+- int8是go的一种整数类型，表示有符号的8位整数。
+- 8位正好是一个字节。
+- uint8是无符号8位整数，范围是0到255
+- byte是uint8的别名，也是8位
+- int64占用64位，因为1字节等于8位，所以int64占用8字节
+
+
 ![alt text](res/map_04.png)
 
 可以看到当前Go运行时使用的方案内存利用效率很高。而kv紧邻存储的方案在map\[int8]int64这样的例子中内存浪费十分严重，其内存利用率=72/128=56.25%，有近一半的空间都浪费掉了。
@@ -62,7 +70,9 @@ key存储区域下方是另一块连续的内存区域，该区域存储的是ke
 
 那么map在什么情况下会进行扩容呢？Go运行时的map实现中引入了一个LoadFactor（负载因子）​，当count > LoadFactor * 2^B或overflow bucket过多时，运行时会对map进行扩容。目前LoadFactor设置为6.5（loadFactorNum/loadFactorDen）​。
 
-如果是因为overflow bucket过多导致的“扩容”​，实际上运行时会新建一个和现有规模一样的bucket数组，然后在进行assign和delete操作时进行排空和迁移；如果是因为当前数据数量超出LoadFactor指定的水位的情况，那么运行时会建立一个两倍于现有规模的bucket数组，但真正的排空和迁移工作也是在进行assign和delete操作时逐步进行的。原bucket数组会挂在hmap的oldbuckets指针下面，直到原buckets数组中所有数据都迁移到新数组，原buckets数组才会被释放。结合图示来理解这个过程会更加深刻。
+如果是因为overflow bucket过多导致的“扩容”​，实际上运行时会新建一个和现有规模一样的bucket数组，然后在进行assign和delete操作时进行排空和迁移；
+
+如果是因为当前数据数量超出LoadFactor指定的水位的情况，那么运行时会建立一个两倍于现有规模的bucket数组，但真正的排空和迁移工作也是在进行assign和delete操作时逐步进行的。原bucket数组会挂在hmap的oldbuckets指针下面，直到原buckets数组中所有数据都迁移到新数组，原buckets数组才会被释放。结合图示来理解这个过程会更加深刻。
 
 ![alt text](res/map_06.png)
 
