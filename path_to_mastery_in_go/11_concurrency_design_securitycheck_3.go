@@ -84,6 +84,16 @@ func newAirportSecurityCheckChannel(id string, queue <-chan struct{}) {
 	}(id)
 }
 
+func max(args ...int) int {
+	n := 0
+	for _, v := range args {
+		if v > n {
+			n = v
+		}
+	}
+	return n
+}
+
 func main() {
 	passengers := 30
 	queue := make(chan struct{}, 30)
