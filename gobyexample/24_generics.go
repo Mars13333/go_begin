@@ -75,6 +75,17 @@ type element[T any] struct {
 	val  T
 }
 
+/*
+为什么需要取地址符 &：
+- &element[T]{val: v} 创建了一个新的 element[T] 结构体，并返回它的地址
+- 因为 head 和 tail 都是指针类型（*element[T]），所以需要存储地址
+- 如果不加 &，会报错，因为不能将结构体直接赋值给指针
+
+为什么使用 {val: v}：
+  - 这是 Go 的结构体字面量语法
+  - 可以只初始化部分字段，其他字段会使用零值
+  - 这里只初始化 val 字段，next 字段会自动初始化为 nil
+*/
 func (lst *List[T]) Push(v T) {
 	if lst.tail == nil {
 		lst.head = &element[T]{val: v}
