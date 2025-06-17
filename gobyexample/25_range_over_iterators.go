@@ -103,7 +103,7 @@ func (lst *List[T]) All() iter.Seq[T] {
 	}
 }
 
-
+// 生成斐波那契数列的无限迭代器
 func genFib() iter.Seq[int] {
 	return func(yield func(int) bool) {
 		a, b := 1, 1
@@ -122,13 +122,16 @@ func main() {
 	lst.Push(13)
 	lst.Push(23)
 
+	// 使用for-range遍历自定义迭代器
 	for e := range lst.All() {
 		fmt.Println(e)
 	}
 
+	// 使用slices.Collect收集迭代器结果为切片
 	all := slices.Collect(lst.All())
 	fmt.Println("all:", all)
 
+	// 使用无限迭代器，通过break控制何时停止
 	for n := range genFib() {
 		if n >= 10 {
 			break
