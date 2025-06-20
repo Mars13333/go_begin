@@ -1,0 +1,2 @@
+Hello from single_file.txt!
+This file will be embedded into the Go binary. 
