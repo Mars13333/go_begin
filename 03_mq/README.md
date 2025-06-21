@@ -1,0 +1,5 @@
+- 基于redis实现mq
+- kafka/rocketmq/rabbitmq
+  - kafka
+  - rabbitmq
+- nsq: 基于go实现的mq
