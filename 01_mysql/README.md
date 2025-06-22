@@ -1,4 +1,5 @@
 - gorm框架
+  - [gorm官网](https://gorm.io/zh_CN/docs/)
 - mysql底层原理
   - 索引原理
   - 事务/锁机制
