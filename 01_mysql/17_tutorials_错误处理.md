@@ -1,0 +1,5 @@
+基本错误处理
+ErrRecordNotFound
+处理错误代码
+方言转换错误
+Errors

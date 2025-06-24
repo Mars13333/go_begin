@@ -1,0 +1,10 @@
+跳过默认事务
+命名策略
+Logger
+NowFunc
+DryRun
+PrepareStmt
+禁用嵌套事务
+AllowGlobalUpdate
+DisableAutomaticPing
+DisableForeignKeyConstraintW
