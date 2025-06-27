@@ -6,3 +6,8 @@
 
 现在只有文本，想要完成md目录的生成。
 generate.go 完成对目录的生成
+
+
+
+
+[gorm官网](https://gorm.io/zh_CN/docs/)
