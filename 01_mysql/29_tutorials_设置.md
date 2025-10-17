@@ -1,2 +1,0 @@
-Set / Get
-InstanceSet / InstanceGet

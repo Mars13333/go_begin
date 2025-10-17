@@ -32,7 +32,7 @@ func (u *User3) BeforeCreate(tx *gorm.DB) (err error) {
 	return nil
 }
 
-func main() {
+func main3() {
 	dsn := "root:123457@tcp(172.17.0.2:3306)/test_gorm?charset=utf8mb4&parseTime=True&loc=Local&allowNativePasswords=true"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		// Logger: logger.Default.LogMode(logger.Info),
