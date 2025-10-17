@@ -24,7 +24,7 @@ func Filter(in <-chan int, out chan<- int, prime int) {
 	}
 }
 
-func main() {
+func RunPrimeSieve() {
 	// 创建初始channel，用于接收Generate函数生成的整数
 	ch := make(chan int)
 
